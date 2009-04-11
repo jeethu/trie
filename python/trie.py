@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+'''
+The trie object is based on James Tauber's trie.py
+http://jtauber.com/2005/02/trie.py
+'''
 
 _SENTINEL = ()
 
@@ -65,22 +69,3 @@ class Trie(object) :
             for c in d[1] :
                 stack.append(d[1][c])
         return ret
-
-def test() :
-    d = {
-        'python'  : 1,
-        'color'   : 2,
-        'colorful': 3,
-        'pythonic': 4
-    }
-    t = Trie()
-    for k in d :
-        t.add(k,d[k])
-    assert set(t.find_prefix_matches('py')) == set([d['python'],d['pythonic']])
-    assert set(t.find_prefix_matches('colo')) == set([d['color'],d['colorful']])
-    assert not t.find_prefix_matches('foo')
-    t.add('foobar',5)
-    assert t.find_prefix_matches('foo') == [5]
-
-if __name__ == '__main__' :
-    test()
