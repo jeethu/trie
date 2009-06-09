@@ -9,7 +9,7 @@
 
     Trie.prototype.add = function( key, value ) {
         var curr_node = this.root;
-        for(var i=0;i<key.length;i++) {
+        for(var i=0,k_len=key.length;i<k_len;i++) {
             var ch = key[i];
             var node = curr_node[1];
             if(ch in node) {
@@ -23,7 +23,7 @@
 
     Trie.prototype.find = function( key ) {
         var curr_node = this.root;
-        for(var i=0; i<key.length; i++) {
+        for(var i=0,k_len=key.length; i<k_len; i++) {
             var ch = key[i];
             if(ch in curr_node[1]) {
                 curr_node = curr_node[1][ch];
@@ -37,7 +37,7 @@
     Trie.prototype.find_prefix = function( key ) {
         var curr_node = this.root;
         var remainder = key;
-        for(var i=0; i<key.length; i++) {
+        for(var i=0,k_len=key.length;i<k_len;i++) {
             var ch = key[i];
             if(ch in curr_node[1]) {
                 curr_node = curr_node[1][ch];
@@ -52,7 +52,7 @@
     function _find_prefix_match( trie, key ) {
         var curr_node = trie.root;
         var remainder = key;
-        for(var i=0; i<key.length; i++) {
+        for(var i=0,k_len=key.length;i<k_len; i++) {
             var ch = key[i];
             if(ch in curr_node[1]) {
                 curr_node = curr_node[1][ch];
