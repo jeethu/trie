@@ -1,17 +1,13 @@
-/*global YAHOO */
 (function() {
-    YAHOO.namespace('tagz.trie');
-
     function Trie() {
         this.root = [null, {}];
     }
-    YAHOO.tagz.trie.Trie = Trie;
 
     Trie.prototype.add = function( key, value ) {
-        var curr_node = this.root;
+        var node, ch, curr_node = this.root;
         for(var i=0,k_len=key.length;i<k_len;i++) {
-            var ch = key[i];
-            var node = curr_node[1];
+            ch = key.charAt(i);
+            node = curr_node[1];
             if(ch in node) {
                 curr_node = node[ch];
             } else {
@@ -22,9 +18,9 @@
     };
 
     Trie.prototype.find = function( key ) {
-        var curr_node = this.root;
+        var ch, curr_node = this.root;
         for(var i=0,k_len=key.length; i<k_len; i++) {
-            var ch = key[i];
+            ch = key.charAt(i);
             if(ch in curr_node[1]) {
                 curr_node = curr_node[1][ch];
             } else {
@@ -35,10 +31,10 @@
     };
 
     Trie.prototype.find_prefix = function( key ) {
-        var curr_node = this.root;
+        var ch, curr_node = this.root;
         var remainder = key;
         for(var i=0,k_len=key.length;i<k_len;i++) {
-            var ch = key[i];
+            ch = key.charAt(i);
             if(ch in curr_node[1]) {
                 curr_node = curr_node[1][ch];
             } else {
@@ -50,10 +46,10 @@
     };
 
     function _find_prefix_match( trie, key ) {
-        var curr_node = trie.root;
+        var ch, curr_node = trie.root;
         var remainder = key;
         for(var i=0,k_len=key.length;i<k_len; i++) {
-            var ch = key[i];
+            ch = key.charAt(i);
             if(ch in curr_node[1]) {
                 curr_node = curr_node[1][ch];
             } else {
@@ -69,10 +65,9 @@
         if(l[1].length>0) {
             return [];
         }
-        var stack = [l[0]];
-        var ret = [];
+        var d, stack = [l[0]], ret = [];
         while(stack.length>0) {
-            var d = stack.pop();
+            d = stack.pop();
             if(d[0]) {
                 ret.unshift(d[0]);
             }
@@ -84,4 +79,5 @@
         }
         return ret;
     };
+    window['Trie'] = Trie;
 }());
